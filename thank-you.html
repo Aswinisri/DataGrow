@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You | DataGrow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="icon" href="img/logo.png" type="image/png" sizes="64x64">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .thank-you-section {
+            min-height: 100vh;
+            background: url('img/thank-bg.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .thank-you-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .thank-you-box {
+            position: relative;
+            z-index: 2;
+            background: white;
+            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .thank-you-box i {
+            font-size: 48px;
+            color: #28a745;
+        }
+
+        .thank-you-box h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin: 20px 0 10px;
+        }
+
+        .thank-you-box p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            padding: 10px 25px;
+            background: #ce9233;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .btn-home:hover {
+            background: #b77e2c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="thank-you-section">
+        <div class="thank-you-box">
+            <i class="bi bi-check-circle-fill"></i>
+            <h1>Thank You!</h1>
+            <p>Your message has been successfully submitted. We’ll get back to you shortly.</p>
+            <a href="index.html" class="btn-home">Back to Home</a>
+        </div>
+    </section>
+
+</body>
+</html>
