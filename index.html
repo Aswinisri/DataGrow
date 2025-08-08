@@ -33,10 +33,158 @@
         <!-- Custom CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <style>
+  #bubble-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 9999; /* adjust if you need it behind some UI */
+  }
+
+  /* Single bubble */
+  .cursor-bubble {
+    position: absolute;
+    width: 14px;              /* base size (JS will randomize) */
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(74, 74, 255, 0.18); /* light bluish bubble */
+    border: 2px solid rgba(74, 74, 255, 0.6);
+    transform: translate(-50%, -50%) scale(1);
+    will-change: transform, opacity;
+    animation: bubble-rise 900ms ease-out forwards;
+    mix-blend-mode: screen; /* optional nice blending */
+  }
+
+  @keyframes bubble-rise {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      filter: blur(0px);
+    }
+    70% {
+      transform: translate(calc(-50% + var(--x-drift)), calc(-50% + var(--y-drift))) scale(var(--end-scale));
+      opacity: 0.45;
+      filter: blur(0.2px);
+    }
+    100% {
+      transform: translate(calc(-50% + var(--x-drift)), calc(-50% + var(--y-drift))) scale(calc(var(--end-scale) * 1.2));
+      opacity: 0;
+      filter: blur(1px);
+    }
+  }
+
+  /* Mobile: reduce z-index and bubble count visually (optional) */
+  @media (max-width: 480px) {
+    .cursor-bubble { width: 10px; height: 10px; }
+  }
+
+.counter {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #c22020;
+  transition: all 0.3s ease-in-out;
+}
+
+.text-17 {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+._4x-1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.achievements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.frame-2996 {
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.text-16 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #111;
+}
+
+.frame-2920 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #c1c6cd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.frame-2920:hover {
+  transform: translateY(-5px);
+}
+
+.frame-2906 img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+}
+
+.text-17 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #c22020;
+}
+
+._4x-1 {
+  font-size: 1.2rem;
+  margin-left: 4px;
+  font-weight: bold;
+}
+
+.text-18 {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .frame-2920 {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+}
+
+@media (max-width: 768px) {
+    .lh-base.text-uppercase.mb-0.text-nowrap {
+        white-space: normal !important; /* allow wrap */
+        line-height: 1.4; /* better spacing for two lines */
+    }
+}
+
+
+
+        </style>
 
     </head>
     <body>
-
+        <div id="bubble-container" aria-hidden="true"></div>
         <!-- Spinner Start -->
         <div id="spinner"
             class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -199,11 +347,64 @@
         </div>
         <!-- About End -->
 
+        <!-- achievements -->
+
+        <div class="achievements">
+            <div class="frame-2996">
+                <div class="text-16">We Provide Data That Converts</div>
+            </div>
+
+            <div class="frame-2920">
+                <div class="frame-2906">
+                    <img
+                        src="https://cdn.prod.website-files.com/668cefca60c3888dc0c908a0/669142a6dd605bed86aae66c_Vectors-Wrapper.svg"
+                        alt="b2b leads data"
+                        class="vectors-wrapper-9">
+                </div>
+                <div class="frame-2919">
+                    <div class="text-17"><span class="counter"
+                            data-target="6000">0</span>+</div>
+                    <div class="text-18">Leads Generated</div>
+                </div>
+            </div>
+
+            <div class="frame-2920">
+                <div class="frame-2906">
+                    <img
+                        src="https://cdn.prod.website-files.com/668cefca60c3888dc0c908a0/669142a618c76051ab43274c_Vectors-Wrapper.svg"
+                        alt="business database"
+                        class="vectors-wrapper-9">
+                </div>
+                <div class="frame-2919">
+                    <div class="text-17"><span class="counter"
+                            data-target="1000">0</span>+</div>
+                    <div class="text-18">Business Served</div>
+                </div>
+            </div>
+
+            <div class="frame-2920">
+                <div class="frame-2906">
+                    <img
+                        src="https://cdn.prod.website-files.com/668cefca60c3888dc0c908a0/669142a8c7c50910f36ca6ed_Vectors-Wrapper.svg"
+                        alt="b2b database" class="vectors-wrapper-9">
+                </div>
+                <div class="frame-2919">
+                    <div class="text-17">
+                        <span class="counter" data-target="4">0</span><span
+                            class="_4x-1">X</span>
+                    </div>
+                    <div class="text-18">Revenue Generated</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Features Start -->
         <div class="container-fluid pt-6 pb-6">
             <div class="container pt-4">
                 <div class="row g-4 feature-row wow fadeIn"
                     data-wow-delay="0.1s">
+                    <h1 class="display-6 text-uppercase mb-5">Why Data Grow
+                        Innovation B2B Prospector Tool?</h1>
                     <!-- Feature Card Start -->
                     <div class="col-md-6 col-lg-4 wow fadeIn"
                         data-wow-delay="0.3s">
@@ -399,7 +600,8 @@
         <!-- Features End -->
 
         <!-- Service Start -->
-        <div class="container-fluid service pt-6 pb-6">
+        <div class="container-fluid service pt-6 pb-6"
+            style="background: floralwhite;">
             <div class="container">
                 <div class="text-center mx-auto wow fadeInUp"
                     data-wow-delay="0.1s" style="max-width: 600px;">
@@ -409,7 +611,8 @@
                 <div class="row g-4">
                     <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
                         data-wow-delay="0.1s">
-                        <div class="service-item h-80 d-flex flex-column">
+                        <div
+                            class="service-item animated-service-card h-80 d-flex flex-column">
                             <div class="service-inner pb-5">
                                 <img class="img-fluid w-100"
                                     src="img/service-1.jpg" alt>
@@ -428,7 +631,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
                         data-wow-delay="0.2s">
-                        <div class="service-item h-80 d-flex flex-column">
+                        <div
+                            class="service-item animated-service-card h-80 d-flex flex-column">
                             <div class="service-inner pb-5">
                                 <img class="img-fluid w-100"
                                     src="img/service-2.jpg" alt>
@@ -446,7 +650,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
                         data-wow-delay="0.3s">
-                        <div class="service-item !h-80 d-flex flex-column">
+                        <div
+                            class="service-item animated-service-card h-80 d-flex flex-column">
                             <div class="service-inner pb-5">
                                 <img class="img-fluid w-100"
                                     src="img/service-3.jpg" alt>
@@ -464,7 +669,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
                         data-wow-delay="0.4s">
-                        <div class="service-item h-80 d-flex flex-column">
+                        <div
+                            class="service-item animated-service-card h-80 d-flex flex-column">
                             <div class="service-inner pb-5">
                                 <img class="img-fluid w-100"
                                     src="img/service-4.jpg" alt>
@@ -484,7 +690,8 @@
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
                         data-wow-delay="0.1s">
-                        <div class="service-item h-80 d-flex flex-column">
+                        <div
+                            class="service-item animated-service-card h-80 d-flex flex-column">
                             <div class="service-inner pb-5">
                                 <img class="img-fluid w-100"
                                     src="img/service-5.jpg" alt>
@@ -505,7 +712,8 @@
 
                     <div class="col-lg-4 col-md-6 col-sm-12 wow fadeInUp"
                         data-wow-delay="0.3s">
-                        <div class="service-item h-100 d-flex flex-column">
+                        <div
+                            class="service-item animated-service-card h-80 d-flex flex-column">
                             <div class="service-inner pb-5">
                                 <img class="img-fluid w-100"
                                     src="img/service-7.jpg" alt>
@@ -938,6 +1146,145 @@
             if (spinner) spinner.classList.remove("show");
         });
     </script>
+
+        <script>
+  function formatNumber(num) {
+    return num.toLocaleString(); // adds comma formatting
+  }
+
+  function animateCounter(counter, speed = 2000) {
+    const target = +counter.getAttribute('data-target');
+    const duration = speed; // total animation time in ms
+    const start = 0;
+    const stepTime = Math.max(Math.floor(duration / target), 10); // min 10ms step
+
+    let current = start;
+
+    const increment = () => {
+      current += 1;
+
+      if (current <= target) {
+        counter.innerText = formatNumber(current);
+        setTimeout(increment, stepTime);
+      } else {
+        counter.innerText = formatNumber(target);
+      }
+    };
+
+    increment();
+  }
+
+  // Re-trigger logic on every scroll into view
+  const counters = document.querySelectorAll('.counter');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const counter = entry.target;
+
+        if (!counter.classList.contains('animated')) {
+          animateCounter(counter, 1500); // you can adjust speed here (ms)
+          counter.classList.add('animated');
+        }
+      } else {
+        // Reset so it can re-trigger
+        entry.target.classList.remove('animated');
+        entry.target.innerText = '0';
+      }
+    });
+  }, {
+    threshold: 0.5 // fire when 50% visible
+  });
+
+  counters.forEach(counter => {
+    observer.observe(counter);
+  });
+</script>
+        <script>
+  (function () {
+    const container = document.getElementById('bubble-container');
+    if (!container) return;
+
+    let lastEmit = 0;
+    const emitInterval = 40; // ms between bubbles (throttle)
+    const maxBubbles = 70;   // maximum bubbles in DOM at once
+
+    // Utility: random in range
+    const rnd = (min, max) => Math.random() * (max - min) + min;
+
+    // Clean up old bubbles if too many
+    function pruneBubbles() {
+      const children = container.children;
+      if (children.length <= maxBubbles) return;
+      const extra = children.length - maxBubbles;
+      for (let i = 0; i < extra; i++) {
+        if (container.firstChild) container.removeChild(container.firstChild);
+      }
+    }
+
+    function spawnBubble(x, y) {
+      const el = document.createElement('div');
+      el.className = 'cursor-bubble';
+
+      // Randomize size, color, drift and scale
+      const size = Math.round(rnd(8, 26));
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+
+      // Optionally randomize color (uncomment if you want multi-color)
+      // const colors = ['rgba(74,74,255,0.18)','rgba(255,120,120,0.14)','rgba(120,255,200,0.14)'];
+      // el.style.background = colors[Math.floor(Math.random()*colors.length)];
+
+      // Position at cursor
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+
+      // Set CSS variables for subtle drift and final scale
+      // small random drift so bubbles spread out
+      const driftX = `${rnd(-30, 30)}px`;
+      const driftY = `${rnd(-40, -10)}px`; // they rise up (negative y)
+      const endScale = (rnd(0.6, 1.4)).toFixed(2);
+
+      el.style.setProperty('--x-drift', driftX);
+      el.style.setProperty('--y-drift', driftY);
+      el.style.setProperty('--end-scale', endScale);
+
+      // Add a tiny rotation border-color variation for nicer look
+      // el.style.borderColor = `rgba(74,74,255,${rnd(0.4,0.8)})`;
+
+      // Remove element after animation ends (safe cleanup)
+      const removeAfter = () => {
+        if (el && el.parentNode === container) container.removeChild(el);
+      };
+      el.addEventListener('animationend', removeAfter, { once: true });
+
+      container.appendChild(el);
+      pruneBubbles();
+    }
+
+    // On pointer move: throttle bubble creation
+    function handlePointerMove(e) {
+      const now = Date.now();
+      if (now - lastEmit < emitInterval) return;
+      lastEmit = now;
+
+      // Support touch events (use first touch)
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+      // Create 1-2 bubbles per tick for a nice trail
+      spawnBubble(x, y);
+      if (Math.random() > 0.65) spawnBubble(x + rnd(-6,6), y + rnd(-6,6));
+    }
+
+    // Attach both mouse and touch moves
+    window.addEventListener('mousemove', handlePointerMove, { passive: true });
+    window.addEventListener('touchmove', handlePointerMove, { passive: true });
+
+    // Optional: stop when user stops moving for a bit (not necessary, just performance nicety)
+    // You can add more controls here (e.g., disable effect on heavy devices).
+  })();
+</script>
     </body>
 
 </html>

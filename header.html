@@ -46,6 +46,8 @@
       .nav-link {
         font-size: 13px !important;
       }
+
+      
     </style>
   </head>
   <body>
@@ -53,7 +55,7 @@
       style="background-color: #000222;">
       <div class="container d-flex justify-content-between align-items-center">
         <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <a class="navbar-brand d-flex align-items-center" href="/index.html">
           <img src="img/logo-removebg-preview1.png" alt="Logo"
             style="height: 70px; width: 130px;">
         </a>
@@ -66,13 +68,6 @@
             aria-controls="navbarCollapse" aria-expanded="false"
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <!-- Close Button (initially hidden) -->
-          <!-- Close Button -->
-          <button id="mobile-close" class="btn text-white fs-3 d-none"
-            type="button" aria-label="Close Menu">
-            &times;
           </button>
 
         </div>
@@ -128,32 +123,60 @@
                 role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">Email Contacts</a>
               <ul class="dropdown-menu" aria-labelledby="emailDropdown">
-                <li><a class="dropdown-item" href="#">By
+                <li><a class="dropdown-item"
+                    href="industry.html">By
                     Industry</a></li>
-                <li><a class="dropdown-item" href="#">By Job
+                <li><a class="dropdown-item"
+                    href="jobTitle.html">By Job
                     Title</a></li>
                 <li><a class="dropdown-item"
-                    href="#">Technology Lists</a></li>
+                    href="technology.html">Technology
+                    Lists</a></li>
                 <li><a class="dropdown-item"
-                    href="#">Healthcare Lists</a></li>
+                    href="healthcare.html">Healthcare
+                    Lists</a></li>
                 <li><a class="dropdown-item"
-                    href="#">Executives Email
+                    href="executive.html">Executives Email
                     List</a></li>
               </ul>
             </li>
 
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="emailDropdown"
+                role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">Services</a>
+              <ul class="dropdown-menu" aria-labelledby="emailDropdown">
+                <li><a class="dropdown-item" href="emailAppending.html">Email
+                    Appending</a></li>
+                <li><a class="dropdown-item" href="emailValidation.html">Email
+                    Validation</a></li>
+                <li><a class="dropdown-item" href="lead.html">Lead
+                    Management</a></li>
+                <li><a class="dropdown-item" href="socialMedia.html">Social
+                    Media
+                    Appending</a></li>
+                <li><a class="dropdown-item" href="dataCleansing.html">Data
+                    Cleansing </a></li>
+                <li><a class="dropdown-item" href="jobTitleApp.html">Job Title
+                    Appending</a></li>
+                <li><a class="dropdown-item" href="dataEnhance.html">Data
+                    Enhancement</a></li>
+
+              </ul>
+            </li>
             <!-- Other Links -->
+            <!-- <li class="nav-item"><a class="nav-link"
+                href="#">Services</a></li> -->
             <li class="nav-item"><a class="nav-link"
-                href="#">Services</a></li>
+                href="buyerSupplier.html">Buyer-Supplier</a></li>
             <li class="nav-item"><a class="nav-link"
-                href="#">Blogs</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Contact
+                href="contact.html">Contact
                 Us</a></li>
           </ul>
 
           <!-- CTA -->
           <div class="d-flex mt-3 mt-lg-0">
-            <a href="contact.html" class="btn btn-primary px-4"
+            <a href="/contact.html" class="btn btn-primary px-4"
               style="background-color: #0274b7; border: none;">
               Book a Demo
             </a>
@@ -162,36 +185,33 @@
       </div>
     </nav>
 
-    <!-- Toggle Script -->
     <script>
-  // Ensure dropdowns inside collapsed navbar work on mobile
-  document.addEventListener('DOMContentLoaded', function () {
-    const dropdowns = document.querySelectorAll('.navbar .dropdown-toggle');
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbarToggler = document.querySelector('.navbar-toggler');
 
-    dropdowns.forEach(dropdown => {
-      dropdown.addEventListener('click', function (e) {
-        // Only act if navbar is collapsed (i.e., visible toggler)
-        if (window.getComputedStyle(document.querySelector('.navbar-toggler')).display !== 'none') {
-          e.preventDefault();
-          const parent = this.parentElement;
-          const menu = parent.querySelector('.dropdown-menu');
-          const isShown = menu.classList.contains('show');
+    // Toggle dropdown manually on mobile
+    document.querySelectorAll('.navbar .dropdown-toggle').forEach(function (dropdownToggle) {
+      dropdownToggle.addEventListener('click', function (e) {
+        const isMobile = getComputedStyle(navbarToggler).display !== 'none';
+        if (isMobile) {
+          e.preventDefault(); // Prevent default anchor behavior
+          const dropdownMenu = this.nextElementSibling;
 
-          // Hide other open dropdowns
-          document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
-            openMenu.classList.remove('show');
+          // Close other open dropdowns
+          document.querySelectorAll('.navbar .dropdown-menu.show').forEach(menu => {
+            if (menu !== dropdownMenu) menu.classList.remove('show');
           });
 
-          // Toggle current
-          menu.classList.toggle('show');
+          // Toggle current dropdown
+          dropdownMenu.classList.toggle('show');
         }
       });
     });
 
     // Close dropdowns when clicking outside
     document.addEventListener('click', function (e) {
-      if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+      if (!e.target.closest('.navbar')) {
+        document.querySelectorAll('.navbar .dropdown-menu.show').forEach(menu => {
           menu.classList.remove('show');
         });
       }

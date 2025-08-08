@@ -33,14 +33,14 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.gmail.com';
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'ashusrini07@gmail.com';
-    $mail->Password   = 'dfwk mpjt zttq stxb'; // App password
+    $mail->Username   = 'info.datagrowinnovation@gmail.com';
+    $mail->Password   = 'gygx vtze pwdp ljcp'; // App password
     $mail->SMTPSecure = 'tls';
     $mail->Port       = 587;
 
     // From and To
     $mail->setFrom($email, $name);
-    $mail->addAddress('ashusrini07@gmail.com');
+    $mail->addAddress('info.datagrowinnovation@gmail.com');
 
     // Email content
     $mail->isHTML(true);

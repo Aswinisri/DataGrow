@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - Data Grow Innovation</title>
+    <style>
+          
+
+h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+h2 {
+  font-size: 20px !important;
+  margin-top: 30px;
+  color: #222;
+}
+
+p {
+  margin-bottom: 16px;
+}
+
+a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  
+
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
+        </style>
+  </head>
+  <body>
+    <div id="bubble-container" aria-hidden="true"></div>
+    <!-- Spinner -->
+    <div id="spinner"
+      class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+      <div class="spinner-border text-primary" role="status"
+        style="width: 3rem; height: 3rem;"></div>
+    </div>
+
+    <!-- Navbar -->
+    <div id="header-placeholder"></div>
+    <div class="pt-6 pb-6" style="margin-top: 65px;">
+      <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>
+          At <strong>Data Grow Innovation</strong>, we are deeply committed
+          to protecting users’ privacy.
+          This Privacy Policy outlines our data collection, processing,
+          and usage policies for our websites,
+          including <a href="https://datagrowinnovation.com/"
+            target="_blank">datagrowinnovation.com</a>.
+          We update this policy periodically, so if you do not agree with
+          the practices outlined here, please do not use the website.
+        </p>
+
+        <p>
+          For any questions about this Privacy Policy or how we manage the
+          information you provide,
+          please email us at <a
+            href="mailto:datagrowinnovation@gmail.com">datagrowinnovation@gmail.com</a>.
+        </p>
+
+        <h2>Information Collected</h2>
+        <p>
+          Data Grow Innovation collects personal information that you
+          submit to us, including contact details or information about you
+          available on the internet from sources such as LinkedIn,
+          Twitter, Facebook, or Google, and publicly available information
+          from service providers.
+        </p>
+        <p>
+          We use various JavaScript-based tracking software (notably
+          Google Analytics, AdRoll, and Pardot) to collect data from every
+          website visitor.
+          To opt out of visitor tracking, disable JavaScript in your
+          browser settings.
+        </p>
+        <p>
+          The website uses cookies, which are small data files sent to
+          your browser from a web server and stored on your computer.
+          Cookies are used to store and track information about users.
+          When you visit our site, Data Grow Innovation may use cookies to
+          track your usage
+          and send personalized content or offers. We also use basic
+          cookies to cache our content in your browser, enhancing page
+          loading performance.
+          You can disable cookie storage in your browser’s content
+          settings.
+        </p>
+
+        <h2>Use of Information</h2>
+        <p>
+          We will use the information you provide to communicate with you
+          about our products and services or for the purpose for which it
+          was provided.
+          Users may opt out of receiving mailings from us by clicking the
+          link in the footer of our email communications.
+        </p>
+        <p>
+          We reserve the right to access and disclose personal information
+          to comply with applicable laws and lawful government requests,
+          operate our systems properly, or protect ourselves or our users.
+        </p>
+        <p>
+          Data Grow Innovation is based in the United States. If you are
+          visiting the website from outside the United States,
+          you agree to the processing of any personal information you
+          provide us according to this Privacy Policy.
+        </p>
+
+        <h2>Data Confidentiality</h2>
+        <p>
+          Data Grow Innovation does not share your personal information
+          with third parties.
+          We may use aggregated customer data and statistics for internal
+          analysis and external marketing purposes.
+        </p>
+
+        <h2>Security</h2>
+        <p>
+          The website has industry-standard security measures in place to
+          protect against the loss, misuse,
+          and alteration of the information under our control.
+        </p>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <!-- Bootstrap Bundle with Popper (needed for dropdown and hamburger) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Load Header -->
+    <script>
+    fetch("header.html")
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("header-placeholder").innerHTML = html;
+            document.getElementById("header-placeholder").classList.add("loaded");
+
+            const path = window.location.pathname.split("/").pop();
+            document.querySelectorAll(".nav-link, .dropdown-item").forEach(link => {
+                const href = link.getAttribute("href");
+                if (href && href.includes(path)) {
+                    link.classList.add("active");
+                    const dropdownToggle = link.closest(".dropdown-menu")?.previousElementSibling;
+                    if (dropdownToggle?.classList.contains("nav-link")) {
+                        dropdownToggle.classList.add("active");
+                    }
+                }
+            });
+        });
+</script>
+
+    <!-- Load Footer -->
+    <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-placeholder").innerHTML = data;
+            document.getElementById("footer-placeholder").classList.add("loaded");
+        });
+</script>
+
+    <!-- Hide Spinner -->
+    <script>
+        window.addEventListener("load", () => {
+            const spinner = document.getElementById("spinner");
+            if (spinner) spinner.classList.remove("show");
+        });
+    </script>
+    <script>
+  (function () {
+    const container = document.getElementById('bubble-container');
+    if (!container) return;
+
+    let lastEmit = 0;
+    const emitInterval = 40; // ms between bubbles (throttle)
+    const maxBubbles = 70;   // maximum bubbles in DOM at once
+
+    // Utility: random in range
+    const rnd = (min, max) => Math.random() * (max - min) + min;
+
+    // Clean up old bubbles if too many
+    function pruneBubbles() {
+      const children = container.children;
+      if (children.length <= maxBubbles) return;
+      const extra = children.length - maxBubbles;
+      for (let i = 0; i < extra; i++) {
+        if (container.firstChild) container.removeChild(container.firstChild);
+      }
+    }
+
+    function spawnBubble(x, y) {
+      const el = document.createElement('div');
+      el.className = 'cursor-bubble';
+
+      // Randomize size, color, drift and scale
+      const size = Math.round(rnd(8, 26));
+      el.style.width = size + 'px';
+      el.style.height = size + 'px';
+
+      // Optionally randomize color (uncomment if you want multi-color)
+      // const colors = ['rgba(74,74,255,0.18)','rgba(255,120,120,0.14)','rgba(120,255,200,0.14)'];
+      // el.style.background = colors[Math.floor(Math.random()*colors.length)];
+
+      // Position at cursor
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+
+      // Set CSS variables for subtle drift and final scale
+      // small random drift so bubbles spread out
+      const driftX = `${rnd(-30, 30)}px`;
+      const driftY = `${rnd(-40, -10)}px`; // they rise up (negative y)
+      const endScale = (rnd(0.6, 1.4)).toFixed(2);
+
+      el.style.setProperty('--x-drift', driftX);
+      el.style.setProperty('--y-drift', driftY);
+      el.style.setProperty('--end-scale', endScale);
+
+      // Add a tiny rotation border-color variation for nicer look
+      // el.style.borderColor = `rgba(74,74,255,${rnd(0.4,0.8)})`;
+
+      // Remove element after animation ends (safe cleanup)
+      const removeAfter = () => {
+        if (el && el.parentNode === container) container.removeChild(el);
+      };
+      el.addEventListener('animationend', removeAfter, { once: true });
+
+      container.appendChild(el);
+      pruneBubbles();
+    }
+
+    // On pointer move: throttle bubble creation
+    function handlePointerMove(e) {
+      const now = Date.now();
+      if (now - lastEmit < emitInterval) return;
+      lastEmit = now;
+
+      // Support touch events (use first touch)
+      const x = e.touches ? e.touches[0].clientX : e.clientX;
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+      // Create 1-2 bubbles per tick for a nice trail
+      spawnBubble(x, y);
+      if (Math.random() > 0.65) spawnBubble(x + rnd(-6,6), y + rnd(-6,6));
+    }
+
+    // Attach both mouse and touch moves
+    window.addEventListener('mousemove', handlePointerMove, { passive: true });
+    window.addEventListener('touchmove', handlePointerMove, { passive: true });
+
+    // Optional: stop when user stops moving for a bit (not necessary, just performance nicety)
+    // You can add more controls here (e.g., disable effect on heavy devices).
+  })();
+</script>
+  </body>
+</html>
